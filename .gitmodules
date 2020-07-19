@@ -1,0 +1,9 @@
+[submodule "api"]
+	path = api
+	url = https://github.com/jumarmartin/courseadvysr-api
+[submodule "web"]
+	path = web
+	url = https://github.com/jumarmartin/cousreadvysr-web
+[submodule "scraper"]
+	path = scraper
+	url = https://github.com/jumarmartin/cousreadvysr-scraper

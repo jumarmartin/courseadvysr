@@ -1,0 +1,32 @@
+API:
+    https://github.com/jumarmartin/courseadvysr-api
+    ☐ Setup Webservers @created(20-07-31 20:32)
+
+        Note that we have to set up SSL and auth before pushing it live, but as a test we won't. 
+
+        ✔ Setup api.courseadvysr courseadvysr.com on Digital Ocean @1h @created(20-07-31 19:40) @done(20-07-31 20:28)
+            We're using Digital Ocean because it's pretty easy to compose then decompose and we're just used to it.
+
+            We have api.courseavysr and courseadvysr.com pointing towards the server but it's showing the splash page for nginx for the latter and 404 not found for the former. The 404 not found is better than nothing as it at least is showing that something should be pointing there.
+
+            This is enlightening: https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-server-blocks-virtual-hosts-on-ubuntu-16-04
+
+        ✔ Setup api.courseadvysr.com for use as an actual API server @created(20-07-31 20:28) @done(20-07-31 21:00)
+            We don't have to add the requisite authentication, just be able to provide responses through the API server, we can lift the authentication methods from bondkeepr -- (PASTETO, PSQL)
+
+            maybe don't even host HTML off of this particular server block.
+
+            enlightening: https://www.digitalocean.com/community/tutorials/how-to-deploy-a-go-web-application-using-nginx-on-ubuntu-18-04
+
+            Do we push just the binary there or do we push binary + code? I think just binary.
+        
+            When setting up servers for golang deployments, use https://github.com/moovweb/gvm.
+            
+            also, use the -B flag ("binary install) instead of the default which is to compile golang from source which will error. ex: "gvm install go1.14.6 -B"
+        ✔ Setup psql server @created(20-07-31 21:00) @done(20-07-31 21:29)
+            Import the .sql file (that isn't on github so we'll find some way to transfer this, probably through ssh but fssh or sshf or something like that or _even_ rsync through ssh or vice versa)
+
+            postgresql (as well as go versions, etc.) on ubuntu instances are woefully outdated.
+Design:
+
+Web:

@@ -23,6 +23,7 @@ API:
             When setting up servers for golang deployments, use https://github.com/moovweb/gvm.
             
             also, use the -B flag ("binary install) instead of the default which is to compile golang from source which will error. ex: "gvm install go1.14.6 -B"
+
         ✔ Setup psql server @created(20-07-31 21:00) @done(20-07-31 21:29)
             Import the .sql file (that isn't on github so we'll find some way to transfer this, probably through ssh but fssh or sshf or something like that or _even_ rsync through ssh or vice versa)
 
@@ -34,7 +35,16 @@ API:
 
             I was really stupid last night and it seems as if I didn't think to capture the err and see what was going on. I knew it was with the connStr but I wasn't as clearheaded as I am this morning.
 
-        ☐ Setup NodeJS server for frontend @created(20-08-01 08:47)
+            UPDATE: 2020-08-01 08:55, the server was listening on port 5433 not 5432... why?
+
+        ☐ Setup NodeJS server for Frontend @created(20-08-01 08:47)
+
+            So, node is o-o-d and we are using a version manager, nvm. located here: https://github.com/nvm-sh/nvm
+            
+            Now we just have to serve and run on courseadvysr.com
+        ✔ Implement Authetication @created(20-08-02 19:11) @done(20-08-02 23:47)
+
+        ☐ Deploy NodeJS + API, look at deploy scripts for easier deployments @created(20-08-02 23:47)
 Design:
 
 Web:

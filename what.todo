@@ -64,6 +64,8 @@ API:
 
         ^ meeting at least on mondays (though we should describe whether we want MWF, MW, or just M) and is an ECO or a CSC class
 
+    ✔ Edge Case: Searching for a course with a course number that ends with a 0 does not match and as such does not return anything. @created(20-08-17 19:08) @done(20-08-17 19:16)
+    
     - On The issuance of tokens @created(20-08-12 02:48)
         Currently, we are issuing token based on just the time issued and whether
         they are entitled to the credential or not (by verifiing user and password
@@ -92,3 +94,9 @@ Web:
     ☐ Implement a periodical credentials refresh @created(20-08-11 12:08)
         See "Implement a Credentials Refresh" in API. If we were not to do this
         people would be erroneously logged out while using the application.
+
+    ☐ Create Filtering Protocols @created(20-08-17 19:09)
+        Taken from "Handle Search Requests" in "API"
+        SELECT * FROM "public"."courses" WHERE ("meetingdays"::TEXT LIKE '%Monday%') AND ("coursesubject"::TEXT LIKE '%ECO%') OR ("meetingdays"::TEXT LIKE '%Monday%') AND ("coursesubject"::TEXT LIKE '%CSC%') ORDER BY "courseregistrationnumber" LIMIT 150 OFFSET 0;
+
+            ^ meeting at least on mondays (though we should describe whether we want MWF, MW, or just M) and is an ECO or a CSC class

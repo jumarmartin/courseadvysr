@@ -1,6 +1,14 @@
+Administration:
+    ☐ User Account Creator @created(20-08-12 02:50)
+        We currently have something like that located within the "hdofajw" folder under "api". There will come a time where this will have to be streamlined.
+    ☐ Password Reset Tool @created(20-08-12 02:50)
+        Probably wrapped under a general Courseadvysr adminstration tool, handling user accounts.
+
 API:
+    
+        
     https://github.com/jumarmartin/courseadvysr-api
-    ☐ Setup Webservers @created(20-07-31 20:32)
+    ✔ Setup Webservers @created(20-07-31 20:32) @done(20-08-11 11:53)
 
         Note that we have to set up SSL and auth before pushing it live, but as a test we won't. 
 
@@ -37,14 +45,50 @@ API:
 
             UPDATE: 2020-08-01 08:55, the server was listening on port 5433 not 5432... why?
 
-        ☐ Setup NodeJS server for Frontend @created(20-08-01 08:47)
+        ✔ Setup NodeJS server for Frontend @created(20-08-01 08:47) @done(20-08-11 12:09)
 
             So, node is o-o-d and we are using a version manager, nvm. located here: https://github.com/nvm-sh/nvm
             
             Now we just have to serve and run on courseadvysr.com
         ✔ Implement Authetication @created(20-08-02 19:11) @done(20-08-02 23:47)
 
-        ☐ Deploy NodeJS + API, look at deploy scripts for easier deployments @created(20-08-02 23:47)
+        ✔ Deploy NodeJS + API, look at deploy scripts for easier deployments @created(20-08-02 23:47) @done(20-08-11 11:53)
+
+    ✔ Handle Search Requests @created(20-08-11 11:53) @done(20-08-17 18:37)
+        We take a string from the website and parse into SQL to pull the requisite SUBJECT and NUMBER (if its there) or CLASS NAME, deliminated by commas.
+
+        ex. CHM 101, CHM, Chemistry I
+            SUB NUM, SUB, Class Name
+
+        SELECT * FROM "public"."courses" WHERE ("meetingdays"::TEXT LIKE '%Monday%') AND ("coursesubject"::TEXT LIKE '%ECO%') OR ("meetingdays"::TEXT LIKE '%Monday%') AND ("coursesubject"::TEXT LIKE '%CSC%') ORDER BY "courseregistrationnumber" LIMIT 150 OFFSET 0;
+
+        ^ meeting at least on mondays (though we should describe whether we want MWF, MW, or just M) and is an ECO or a CSC class
+
+    - On The issuance of tokens @created(20-08-12 02:48)
+        Currently, we are issuing token based on just the time issued and whether
+        they are entitled to the credential or not (by verifiing user and password
+        match). I'm pretty sure we'll have to store the most recent token issued to a user
+        because of the ability to log in multiple times, creating multiple tokens that are all
+        legal. I can assume that this could be an issue which would allow multiple machines
+        be under the same user which might not be desired. Will look into that.
+    
+    ☐ Implement a Credentials Refresh @created(20-08-11 12:06)
+        Currently, credentials are issued at five minute intervals and after
+        we do not reissue credentials which leads to being in a logged out
+        state. We should have an endpoint that can be hit to authorize the
+        issue of a new credential (in 5m intervals) with the current
+        un-expired credential.
 Design:
 
+Database:
+    ✔ Make sure that everything that must be unique, is @created(20-08-12 03:08) @done(20-08-17 18:37)
+
 Web:
+    ✔ Implement Search Bar @created(20-08-11 11:53) @done(20-08-17 18:37)
+        Implement a Search bar, then wire it up
+
+        This will require rewriting the current get request to get 
+
+    ☐ Implement a periodical credentials refresh @created(20-08-11 12:08)
+        See "Implement a Credentials Refresh" in API. If we were not to do this
+        people would be erroneously logged out while using the application.

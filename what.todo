@@ -6,7 +6,6 @@ Administration:
 
 API:
     
-        
     https://github.com/jumarmartin/courseadvysr-api
     ✔ Setup Webservers @created(20-07-31 20:32) @done(20-08-11 11:53)
 
@@ -80,12 +79,67 @@ API:
         state. We should have an endpoint that can be hit to authorize the
         issue of a new credential (in 5m intervals) with the current
         un-expired credential.
+    
+    ☐ Surface Errors to Web @created(20-08-21 20:46)
+        Currently, we do not surface errors and instead just fail silently
+        (or fail in the console). This is untenable come a much wider release 
+        in the future. We have to build a selection of user readable errors that
+        can be sent to the website and shown to the user. Maybe we can send a
+        nicely formed error code to describe what happened on our end.
+
+    ✔  Support Course Selections & Storage @created(20-09-04 18:14) @done(20-09-04 22:57)
+        We're using a junction table (user_courses) to do so! Maybe we should
+        do something better but it seems this is the best possible implementation.
+        
+        INSERT INTO "public"."user_courses" ("username", "course") VALUES ('jumar', '82584');
+        An Example Way of Adding a connection ^
+        "username" takes the username of a person, "course" takes the 
+        courseregistrationnumber located in the courses table... It's the (hopefully)
+        always unique key for each course listed in the catalog.
+    
 Design:
+    ☐ Improve the Design of the actual Table @created(20-08-21 20:58)
+        The basic bootstrap design kinda sucks
 
 Database:
     ✔ Make sure that everything that must be unique, is @created(20-08-12 03:08) @done(20-08-17 18:37)
 
+    ✔ Enforce Uniqueness Amogst all Unique Items @created(20-08-21 20:46) @done(20-09-04 18:20)
+        This refers to users, for instance. I'm not sure if the database currently
+        enforces uniqueness THOUGH this should only be another level of redundancy
+        due to the checks when registering for an account should catch to see 
+        whether a given username or email is already taken. If, somehow, this
+        was not caught by the API, this will help simplify the flow and remove
+        collisions from the db.
+
+        “2020-09-04” this was inadvertantly accomplished by implementing the 
+        backing to course selections in the user_courses junction table.
+    ☐ Create an UPDATE func when we update the db with new course information @created(20-09-04 18:34)
+        Course locations, mostly, change so much leaving our information very stale.
+        Currently, there is only an INSERT being called, not 
 Web:
+    ☐ Display Errors from API @created(20-08-21 20:48)
+        See: Surface Errors to Web in "API"
+        The UX of Courseadvysr leaves much to be desired. We currently fail
+        silently and that isn't good for the end user who might not understand
+        that their request may be malformed. We must surface end-user understandable
+        errors to help them navigate the site. Probably modals. 
+
+    ☐ Implement Filtering of Courses based on filterable data @created(20-08-21 20:40)
+        We're not surfacing all of the data we have, and we provide _too much_ data to consider.
+        This would help make things easier to grok and understand.
+
+        Providing a user with tools to filter out courses based on their times, 
+        faculty member, days offered and whatever else would be very nice to have
+        and would be better in line with the options OnTrack gives as well.
+
+        As we don't want to needlessly query the db for filtering searches, we
+        can instead do it all on device, as the cost of getting all of the CHM 
+        or COM courses for instance is negligible... for now at least.
+    ☐ Implement Selectors for Selecting Courses @created(20-08-21 20:39)
+        With searching done, the next iteration is to allow for pepole to select
+        courses from the surfaced courses.
+    
     ✔ Implement Search Bar @created(20-08-11 11:53) @done(20-08-17 18:37)
         Implement a Search bar, then wire it up
 
@@ -99,4 +153,4 @@ Web:
         Taken from "Handle Search Requests" in "API"
         SELECT * FROM "public"."courses" WHERE ("meetingdays"::TEXT LIKE '%Monday%') AND ("coursesubject"::TEXT LIKE '%ECO%') OR ("meetingdays"::TEXT LIKE '%Monday%') AND ("coursesubject"::TEXT LIKE '%CSC%') ORDER BY "courseregistrationnumber" LIMIT 150 OFFSET 0;
 
-            ^ meeting at least on mondays (though we should describe whether we want MWF, MW, or just M) and is an ECO or a CSC class
+        ^ meeting at least on mondays (though we should describe whether we want MWF, MW, or just M) and is an ECO or a CSC class

@@ -65,7 +65,7 @@ API:
 
     ✔ Edge Case: Searching for a course with a course number that ends with a 0 does not match and as such does not return anything. @created(20-08-17 19:08) @done(20-08-17 19:16)
     
-    - On The issuance of tokens @created(20-08-12 02:48)
+    - On The issuane of tokens @created(20-08-12 02:48)
         Currently, we are issuing token based on just the time issued and whether
         they are entitled to the credential or not (by verifiing user and password
         match). I'm pretty sure we'll have to store the most recent token issued to a user
@@ -114,7 +114,7 @@ Database:
 
         “2020-09-04” this was inadvertantly accomplished by implementing the 
         backing to course selections in the user_courses junction table.
-    ☐ Create an UPDATE func when we update the db with new course information @created(20-09-04 18:34)
+    ✔ Create an UPDATE func when we update the db with new course information @created(20-09-04 18:34) @done(20-09-20 18:48)
         Course locations, mostly, change so much leaving our information very stale.
         Currently, there is only an INSERT being called, not 
 Web:

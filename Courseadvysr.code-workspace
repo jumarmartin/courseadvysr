@@ -1,0 +1,17 @@
+{
+    "folders": [
+		{
+			"path": "api"
+		},
+		{
+			"path": "web"
+		},
+		{
+			"path": "scraper"
+		},
+		{
+			"path": "sql"
+		}
+	],
+    "settings": {}
+}

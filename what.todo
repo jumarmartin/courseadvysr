@@ -5,7 +5,10 @@ Administration:
         Probably wrapped under a general Courseadvysr adminstration tool, handling user accounts.
 
 API:
-    
+    ☐ Cannot search for Laboratory and Recitation Sessions @created(21-02-13 23:25)
+        Currently, the offending code in file://./api/db.go in the searchCourses function and probably line 169 (reCourseSub regex) does not allow for searches BIOL, CHML, CHMR due to it being four characters long instead of the usual three characters. Will need to work around this 
+        "reCourseSub := regexp.MustCompile(`(?i)\A[A-Z]{3}`)"
+        
     https://github.com/jumarmartin/courseadvysr-api
     ✔ Setup Webservers @created(20-07-31 20:32) @done(20-08-11 11:53)
 
@@ -118,6 +121,9 @@ Database:
         Course locations, mostly, change so much leaving our information very stale.
         Currently, there is only an INSERT being called, not 
 Web:
+    ✔ Make Things Better™ @created(21-02-13 14:42) @started(21-02-13 14:44) @done(21-02-13 22:10) @lasted(7h26m39s)
+        The codebase, its structure, and what it looks like is a mess. Make it better.
+
     ☐ Display Errors from API @created(20-08-21 20:48)
         See: Surface Errors to Web in "API"
         The UX of Courseadvysr leaves much to be desired. We currently fail

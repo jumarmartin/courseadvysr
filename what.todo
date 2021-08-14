@@ -3,11 +3,14 @@ Administration:
         We currently have something like that located within the "hdofajw" folder under "api". There will come a time where this will have to be streamlined.
     ☐ Password Reset Tool @created(20-08-12 02:50)
         Probably wrapped under a general Courseadvysr adminstration tool, handling user accounts.
+AKO:
+    ☐ Not capturing courses with no meeting information @created(21-02-15 10:08)
+        When gathering information for the AKO system, 
 
 API:
     ☐ Cannot search for Laboratory and Recitation Sessions @created(21-02-13 23:25)
         Currently, the offending code in file://./api/db.go in the searchCourses function and probably line 169 (reCourseSub regex) does not allow for searches BIOL, CHML, CHMR due to it being four characters long instead of the usual three characters. Will need to work around this 
-        "reCourseSub := regexp.MustCompile(`(?i)\A[A-Z]{3}`)"
+        "reCourseSub := regexp.MustCompile(`\A[A-Z]{3,4}`)"
         
     https://github.com/jumarmartin/courseadvysr-api
     ✔ Setup Webservers @created(20-07-31 20:32) @done(20-08-11 11:53)
